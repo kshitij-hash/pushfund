@@ -78,7 +78,7 @@ PushFund leverages Push Chain's Universal Execution Account (UEA) to enable:
 
 **Contract Addresses:**
 - UEA Factory: `0x00000000000000000000000000000000000000eA`
-- CampaignFactory: Deployed on testnet
+- CampaignFactory: `0xFC447e03C631A78dDf1F6b33a4D8e79b81518662`
 
 **Platform Fee:** 2.5% (250 basis points)
 

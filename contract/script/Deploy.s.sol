@@ -6,7 +6,7 @@ import "../src/CampaignFactory.sol";
 
 /**
  * @title Deploy
- * @notice Deployment script for UniFund contracts on Push Chain
+ * @notice Deployment script for pushfund contracts on Push Chain
  * @dev Run with: forge script script/Deploy.s.sol --rpc-url <RPC_URL> --broadcast --private-key <KEY>
  */
 contract Deploy is Script {
@@ -15,7 +15,7 @@ contract Deploy is Script {
         address platformFeeRecipient = vm.envOr("PLATFORM_FEE_RECIPIENT", msg.sender);
 
         console.log("==============================================");
-        console.log("UniFund Deployment Script");
+        console.log("pushfund Deployment Script");
         console.log("==============================================");
         console.log("Deployer:", msg.sender);
         console.log("Platform Fee Recipient:", platformFeeRecipient);
