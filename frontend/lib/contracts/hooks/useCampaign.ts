@@ -45,7 +45,7 @@ export function useCampaign() {
         return true;
       } catch (error) {
         console.error('Failed to contribute:', error);
-        const errorMsg = getErrorMessage(error, 'Failed to contribute to campaign');
+        const errorMsg = getErrorMessage(error);
         toast.error(errorMsg);
         return false;
       } finally {
@@ -84,7 +84,7 @@ export function useCampaign() {
         return true;
       } catch (error) {
         console.error('Failed to withdraw:', error);
-        const errorMsg = getErrorMessage(error, 'Failed to withdraw funds');
+        const errorMsg = getErrorMessage(error);
         toast.error(errorMsg);
         return false;
       } finally {
@@ -123,7 +123,7 @@ export function useCampaign() {
         return true;
       } catch (error) {
         console.error('Failed to claim refund:', error);
-        const errorMsg = getErrorMessage(error, 'Failed to claim refund');
+        const errorMsg = getErrorMessage(error);
         toast.error(errorMsg);
         return false;
       } finally {

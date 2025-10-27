@@ -11,7 +11,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { getPublicClient } from '@/lib/contracts';
-import { formatEther } from 'viem';
+import { formatEther, type AbiEvent } from 'viem';
 import { ExternalLink, Download, ArrowDownRight, ArrowUpRight, RotateCcw } from 'lucide-react';
 
 interface Transaction {
@@ -57,14 +57,14 @@ export function TransactionHistory({ campaignAddress, className = '' }: Transact
 
         // Find event definitions from ABI
         const contributionEvent = CampaignABI.find(
-          (item: any) => item.type === 'event' && item.name === 'ContributionReceived'
-        );
+          (item: { type?: string; name?: string }) => item.type === 'event' && item.name === 'ContributionReceived'
+        ) as AbiEvent | undefined;
         const withdrawalEvent = CampaignABI.find(
-          (item: any) => item.type === 'event' && item.name === 'FundsWithdrawn'
-        );
+          (item: { type?: string; name?: string }) => item.type === 'event' && item.name === 'FundsWithdrawn'
+        ) as AbiEvent | undefined;
         const refundEvent = CampaignABI.find(
-          (item: any) => item.type === 'event' && item.name === 'RefundClaimed'
-        );
+          (item: { type?: string; name?: string }) => item.type === 'event' && item.name === 'RefundClaimed'
+        ) as AbiEvent | undefined;
 
         console.log('Event definitions:', { contributionEvent, withdrawalEvent, refundEvent });
 
@@ -110,7 +110,7 @@ export function TransactionHistory({ campaignAddress, className = '' }: Transact
         for (const log of contributionLogs) {
           console.log('Contribution log:', log);
           const block = await publicClient.getBlock({ blockHash: log.blockHash! });
-          const args = log.args as any;
+          const args = (log as unknown as { args: { contributor?: string; amount?: bigint; originChain?: string } }).args;
           allTxs.push({
             type: 'contribution',
             address: args.contributor as string,
@@ -125,7 +125,7 @@ export function TransactionHistory({ campaignAddress, className = '' }: Transact
         // Parse withdrawals
         for (const log of withdrawalLogs) {
           const block = await publicClient.getBlock({ blockHash: log.blockHash! });
-          const args = log.args as any;
+          const args = (log as unknown as { args: { creator?: string; amount?: bigint; platformFee?: bigint } }).args;
           allTxs.push({
             type: 'withdrawal',
             address: args.creator as string,
@@ -139,7 +139,7 @@ export function TransactionHistory({ campaignAddress, className = '' }: Transact
         // Parse refunds
         for (const log of refundLogs) {
           const block = await publicClient.getBlock({ blockHash: log.blockHash! });
-          const args = log.args as any;
+          const args = (log as unknown as { args: { contributor?: string; amount?: bigint } }).args;
           allTxs.push({
             type: 'refund',
             address: args.contributor as string,

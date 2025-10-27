@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -9,29 +9,28 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Separator } from '@/components/ui/separator';
-import { copyToClipboard } from '@/lib/utils';
-import { toast } from 'sonner';
-import { Share2, Copy, Check } from 'lucide-react';
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
+import { copyToClipboard } from "@/lib/utils";
+import { toast } from "sonner";
+import { Share2, Copy, Check } from "lucide-react";
 
 interface ShareButtonProps {
   campaignAddress: string;
   campaignTitle: string;
   campaignDescription?: string;
-  variant?: 'default' | 'outline' | 'ghost';
-  size?: 'default' | 'sm' | 'lg' | 'icon';
+  variant?: "default" | "outline" | "ghost";
+  size?: "default" | "sm" | "lg" | "icon";
   className?: string;
 }
 
 export function ShareButton({
   campaignAddress,
   campaignTitle,
-  campaignDescription,
-  variant = 'outline',
-  size = 'default',
+  variant = "outline",
+  size = "default",
   className,
 }: ShareButtonProps) {
   const [open, setOpen] = useState(false);
@@ -39,9 +38,11 @@ export function ShareButton({
 
   // Construct the shareable URL
   // In production, use window.location.origin; fallback to env var or localhost
-  const baseUrl = typeof window !== 'undefined' && window.location.origin !== 'http://localhost:3000'
-    ? window.location.origin
-    : process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+  const baseUrl =
+    typeof window !== "undefined" &&
+    window.location.origin !== "http://localhost:3000"
+      ? window.location.origin
+      : process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
   const shareUrl = `${baseUrl}/campaigns/${campaignAddress}`;
 
   // Create engaging social media text
@@ -52,10 +53,10 @@ export function ShareButton({
 
     if (success) {
       setCopied(true);
-      toast.success('Link copied to clipboard!');
+      toast.success("Link copied to clipboard!");
       setTimeout(() => setCopied(false), 2000);
     } else {
-      toast.error('Failed to copy link. Please try again.');
+      toast.error("Failed to copy link. Please try again.");
     }
   };
 
@@ -63,10 +64,10 @@ export function ShareButton({
     const encodedUrl = encodeURIComponent(shareUrl);
     const encodedText = encodeURIComponent(shareText);
     // Add hashtags for better discoverability
-    const hashtags = 'PushChain,Crowdfunding,Web3';
+    const hashtags = "PushChain,Crowdfunding,Web3";
     const twitterUrl = `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}&hashtags=${hashtags}`;
 
-    window.open(twitterUrl, '_blank', 'noopener,noreferrer');
+    window.open(twitterUrl, "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -74,7 +75,7 @@ export function ShareButton({
       <DialogTrigger asChild>
         <Button variant={variant} size={size} className={className}>
           <Share2 className="h-4 w-4" />
-          {size !== 'icon' && <span className="ml-2">Share</span>}
+          {size !== "icon" && <span className="ml-2">Share</span>}
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
@@ -116,7 +117,7 @@ export function ShareButton({
                   <Copy className="h-4 w-4" />
                 )}
                 <span className="sr-only">
-                  {copied ? 'Copied' : 'Copy link'}
+                  {copied ? "Copied" : "Copy link"}
                 </span>
               </Button>
             </div>

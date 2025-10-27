@@ -161,7 +161,7 @@ export function parseContractError(error: unknown): ParsedError {
 /**
  * Display user-friendly error toast
  */
-export function displayError(error: unknown, fallbackMessage?: string): void {
+export function displayError(error: unknown): void {
   const parsed = parseContractError(error);
 
   // For now, just return the formatted message
@@ -175,7 +175,7 @@ export function displayError(error: unknown, fallbackMessage?: string): void {
 /**
  * Get a simple error message string
  */
-export function getErrorMessage(error: unknown, fallbackMessage = 'Transaction failed'): string {
+export function getErrorMessage(error: unknown): string {
   const parsed = parseContractError(error);
   return `${parsed.message}${parsed.action ? ' ' + parsed.action : ''}`;
 }

@@ -71,7 +71,7 @@ export function useCampaignFactory() {
         }
 
         // Type assertion for the event args
-        const event = events[0] as any;
+        const event = events[0] as { args?: { campaignAddress?: string } };
         const campaignAddress = event.args?.campaignAddress as string;
         console.log('Extracted campaign address:', campaignAddress);
 
@@ -84,7 +84,7 @@ export function useCampaignFactory() {
         return campaignAddress;
       } catch (error) {
         console.error('Failed to create campaign:', error);
-        const errorMsg = getErrorMessage(error, 'Failed to create campaign');
+        const errorMsg = getErrorMessage(error);
         toast.error(errorMsg);
         return null;
       } finally {

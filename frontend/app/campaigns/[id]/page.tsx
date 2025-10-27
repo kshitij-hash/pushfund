@@ -36,6 +36,7 @@ import {
   Info,
   Loader2
 } from 'lucide-react';
+import Image from 'next/image';
 
 export const dynamic = 'force-dynamic';
 
@@ -244,7 +245,6 @@ export default function CampaignDetailPage() {
                       campaignAddress={campaign.campaignAddress}
                       campaignTitle={campaign.title}
                       variant="outline"
-                      size="icon"
                     />
                   </div>
                 </div>
@@ -263,9 +263,11 @@ export default function CampaignDetailPage() {
               {/* Campaign Image */}
               {campaign.imageUrl && (
                 <div className="aspect-video overflow-hidden rounded-lg border bg-muted">
-                  <img
+                  <Image
                     src={campaign.imageUrl}
                     alt={campaign.title}
+                    width={1200}
+                    height={675}
                     className="h-full w-full object-cover"
                     onError={(e) => {
                       e.currentTarget.src = 'https://placehold.co/1200x675/EEE/31343C?font=open-sans&text=No+Image';
@@ -274,7 +276,7 @@ export default function CampaignDetailPage() {
                 </div>
               )}
 
-              {/* Tabs for Organization */}
+              {/* Tabs for Campaign */}
               <Tabs defaultValue="overview" className="space-y-6">
                 <TabsList className="grid w-full grid-cols-3">
                   <TabsTrigger value="overview">Overview</TabsTrigger>

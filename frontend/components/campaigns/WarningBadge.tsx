@@ -54,9 +54,8 @@ const WARNING_CONFIGS: Record<WarningType, WarningConfig> = {
   },
 };
 
-export function WarningBadge({ type, level, className = '' }: WarningBadgeProps) {
+export function WarningBadge({ type, className = '' }: WarningBadgeProps) {
   const config = WARNING_CONFIGS[type];
-  const finalLevel = level || config.level;
 
   return (
     <Badge

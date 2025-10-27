@@ -314,7 +314,7 @@ export default function CreateCampaignPage() {
                 <AccordionContent className="text-muted-foreground">
                   Your campaign will automatically accept contributions from Ethereum, Arbitrum, Base,
                   and Solana. All tokens are automatically bridged to Push Chain using Universal Execution Accounts (UEA).
-                  Contributors don't need to know about bridging - it happens seamlessly in the background.
+                  Contributors don&apos;t need to know about bridging - it happens seamlessly in the background.
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="all-or-nothing">

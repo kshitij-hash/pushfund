@@ -3,11 +3,16 @@
  * Provides loading states for different UI elements
  */
 
-import { Skeleton } from '@/components/ui/skeleton';
-import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
+import { Skeleton } from "@/components/ui/skeleton";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
 
 interface SkeletonLoaderProps {
-  variant?: 'campaign-card' | 'campaign-detail' | 'campaign-grid' | 'list';
+  variant?: "campaign-card" | "campaign-detail" | "campaign-grid" | "list";
   count?: number;
   className?: string;
 }
@@ -153,18 +158,17 @@ function ListSkeleton({ count = 3 }: { count?: number }) {
  * Main Skeleton Loader Component
  */
 export function SkeletonLoader({
-  variant = 'campaign-grid',
+  variant = "campaign-grid",
   count = 6,
-  className = '',
 }: SkeletonLoaderProps) {
   switch (variant) {
-    case 'campaign-card':
+    case "campaign-card":
       return <CampaignCardSkeleton />;
-    case 'campaign-detail':
+    case "campaign-detail":
       return <CampaignDetailSkeleton />;
-    case 'campaign-grid':
+    case "campaign-grid":
       return <CampaignGridSkeleton count={count} />;
-    case 'list':
+    case "list":
       return <ListSkeleton count={count} />;
     default:
       return <CampaignGridSkeleton count={count} />;
